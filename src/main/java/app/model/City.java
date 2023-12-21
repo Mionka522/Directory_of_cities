@@ -8,7 +8,7 @@ public class City {
     private int population;
     private String foundation;
 
-    public City(int index, String name, String region, String district, int population, String foundation) {
+    public City() {
         this.index = index;
         this.name = name;
         this.region = region;
@@ -63,5 +63,10 @@ public class City {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+    @Override
+    public String toString() {
+        return "City{" + "name=" + name + ", region=" + region + ", district="
+                + district + ", population=" + population + ", foundation=" + foundation + '}';
     }
 }

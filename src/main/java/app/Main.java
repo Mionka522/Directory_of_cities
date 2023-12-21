@@ -7,7 +7,10 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-       var r = FileHandler.read();
-       r.forEach(System.out::println);
+        FileHandler fileHandler = new FileHandler();
+        ArrayList<City> parsedCities = fileHandler.parseCSV("Задача ВС Java Сбер.csv");
+
+        parsedCities.forEach(s -> System.out.println(s.toString()));
+
     }
 }

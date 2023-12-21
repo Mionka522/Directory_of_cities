@@ -1,32 +1,48 @@
 package app;
+import org.apache.commons.csv.*;
+import org.apache.commons.csv.CSVRecord;
 import app.model.City;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import com.fasterxml.jackson.databind.MappingIterator;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
 public class FileHandler {
-    public ArrayList<City> cities;
 
-    public static ArrayList<City> read() throws IOException {
+
+    public ArrayList<City> parseCSV(String filePath) {
         ArrayList<City> cities = new ArrayList<>();
 
-        Path path = Path.of("Задача ВС Java Сбер.csv");
-        Files.lines(path)
-                .map(line -> {
-                    String[] fields = line.split(";");
-                    return new City(Integer.parseInt(fields[0]),fields[1], fields[2], fields[3],Integer.parseInt(fields[4]),fields[5]);
-                }).forEach(cities::add);
+        try (Reader reader = Files.newBufferedReader(Paths.get(filePath));
+             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withDelimiter(';'))) {
 
-        return cities;
-
+            for (CSVRecord csvRecord : csvParser) {
+                // Создайте новый объект и заполните его значениями из CSV записи
+                City city = new City();
+                city.setIndex(Integer.parseInt(csvRecord.get(0)));
+                city.setName(csvRecord.get(1));
+                city.setRegion(csvRecord.get(2));
+                city.setDistrict(csvRecord.get(3));
+                city.setPopulation(Integer.parseInt(csvRecord.get(4)));
+                city.setFoundation(csvRecord.get(5));
+                cities.add(city);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        return cities;
     }
+
+
+
+
+}
+
