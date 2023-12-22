@@ -5,6 +5,7 @@ import app.model.City;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -42,6 +43,17 @@ public class Main {
                     System.out.println(u.searchMaxPopulation(parsedCities));
                     //Поиск города с наибольшим количеством жителей
                     menu();
+
+                case 5:
+                    // поиск количества городов в разрезе регионов
+                    Map<String, Integer> regions = u.NumberOfCitiesInTheRegion(parsedCities);
+                    for (Map.Entry<String, Integer> entry : regions.entrySet()) {
+                        System.out.println(entry.getKey() + " = " + entry.getValue());
+
+                    }
+                    menu();
+
+
                 case -1:
                     System.out.println("Завершение программы");
                     System.exit(0);
