@@ -10,11 +10,6 @@ import java.util.Comparator;
 public class Main {
     public static void main(String[] args) {
 
-        // FileHandler fileHandler = new FileHandler();
-        //ArrayList<City> parsedCities = fileHandler.parseCSV("Задача ВС Java Сбер.csv");
-
-        //parsedCities.forEach(s -> System.out.println(s.toString()));
-
 
         menu();
     }
@@ -28,16 +23,22 @@ public class Main {
 
                 case 1:
                     parsedCities.forEach(s -> System.out.println(s.toString()));
+                    //Вывести список без сортировки, такой как в файле
 
                     menu();//возврат к выбору действия
 
                 case 2:
                     Collections.sort(parsedCities, (city1, city2) -> String.CASE_INSENSITIVE_ORDER.compare(city1.getName(), city2.getName()));
                     parsedCities.forEach(s -> System.out.println(s.toString()));
+                    //Сортировка списка городов по наименованию в алфавитном порядке по убыванию без учета регистра
+
                     menu(); //возврат в меню
                 case 3:
                     Collections.sort(parsedCities, Comparator.comparing(City::getDistrict).thenComparing(City::getName));
                     parsedCities.forEach(s -> System.out.println(s.toString()));
+                    //Сортировка списка городов по федеральному округу и наименованию города внутри каждого федерального
+                    // округа в алфавитном порядке по убыванию с учетом регистра;
+
                     menu();//возврат в меню
 
 

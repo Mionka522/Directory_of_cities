@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 
 public class FileHandler {
-
+//Чтение из файла и создание на его основе списка
 
     public ArrayList<City> parseCSV(String filePath) {
         ArrayList<City> cities = new ArrayList<>();
@@ -24,7 +24,7 @@ public class FileHandler {
              CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withDelimiter(';'))) {
 
             for (CSVRecord csvRecord : csvParser) {
-                // Создайте новый объект и заполните его значениями из CSV записи
+
                 City city = new City();
                 city.setIndex(Integer.parseInt(csvRecord.get(0)));
                 city.setName(csvRecord.get(1));
