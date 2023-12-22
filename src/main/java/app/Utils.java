@@ -1,17 +1,17 @@
 package app;
 
-import java.util.Scanner;
+import app.model.City;
 
-public class Choice {
+import java.util.*;
+
+public class Utils {
     Scanner in = new Scanner(System.in);
     public int getIntInput() {
         // метод вызывается каждый раз, когда любой метод
         // использует вызов System.out.println() для того,
         // чтобы запросить у пользователя значение int
 
-        int num = in.nextInt();
-
-        return num;
+        return in.nextInt();
     }
     public int getChoice() {
         //Вывод информации о существующих командах
@@ -21,9 +21,18 @@ public class Choice {
                 "1) без сортировки\n" +
                 "2) Сортировка списка городов по наименованию в алфавитном порядке по убыванию без учета регистра\n" +
                 "3) Сортировка списка городов по федеральному округу и наименованию города внутри каждого федерального округа в алфавитном порядке по убыванию с учетом регистра\n" +
+                "4) Поиск города с наибольшим количеством жителей\n"+
+
                 "Выберите вариант сортировки списка (или введите -1 чтобы выйти):\n" +
+
                 "\n"+"Выберете действие: ");
-        int choice = getIntInput();
-        return choice;
+        return getIntInput();
     }
-}
+    public String searchMaxPopulation(ArrayList<City> cities) {
+        //Поиск города с наибольшим количеством жителей
+        cities.sort(Comparator.comparingInt(City::getPopulation));
+        City PopulousCity = cities.getLast();
+
+        return "["+PopulousCity.getIndex()+"]"+"="+PopulousCity.getPopulation();
+    }
+    }
